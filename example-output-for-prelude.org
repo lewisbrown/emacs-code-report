@@ -1,0 +1,1313 @@
+* Prelude by file
+** /home/lbrown/.emacs.d/core/prelude-core.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-core.el bob
+Commentary
+*** require
+**** dash 
+**** epl 
+**** ov 
+**** thingatpt 
+*** provide
+**** prelude-core 
+*** command
+**** prelude-annotate-todo ()
+  "Put fringe marker on TODO: lines in the curent buffer."
+**** prelude-cleanup-buffer-or-region ()
+  "Cleanup a region if selected, otherwise the whole buffer."
+**** prelude-copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+**** prelude-create-scratch-buffer ()
+  "Create a new scratch buffer."
+**** prelude-delete-file-and-buffer ()
+  "Kill the current buffer and deletes the file it is visiting."
+**** prelude-duplicate-and-comment-current-line-or-region (arg)
+  "Duplicates and comments the current line or region ARG times.
+If there's no region, the current line will be duplicated.  However, if
+there's a region, all lines that region covers will be duplicated."
+**** prelude-duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated.  However, if
+there's a region, all lines that region covers will be duplicated."
+**** prelude-eval-and-replace ()
+  "Replace the preceding sexp with its value."
+**** prelude-find-shell-init-file ()
+  "Edit the shell init file in another window."
+**** prelude-find-user-init-file (&optional arg)
+  "Edit the `prelude-user-init-file', in another window.
+With a prefix argument ARG, find the `user-init-file' instead."
+**** prelude-fullscreen ()
+  "Make Emacs window fullscreen.
+
+This follows freedesktop standards, should work in X servers."
+**** prelude-indent-defun ()
+  "Indent the current defun."
+**** prelude-indent-rigidly-and-copy-to-clipboard (begin end arg)
+  "Indent region between BEGIN and END by ARG columns and copy to clipboard."
+**** prelude-insert-date ()
+  "Insert a timestamp according to locale's date and time format."
+**** prelude-kill-other-buffers ()
+  "Kill all buffers but the current one.
+Doesn't mess with special buffers."
+**** prelude-kill-whole-line (&optional arg)
+  "A simple wrapper around command `kill-whole-line' that respects indentation.
+Passes ARG to command `kill-whole-line' when provided."
+**** prelude-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+**** prelude-open-with (arg)
+  "Open visited file in default external program.
+When in dired mode, open file under the cursor.
+
+With a prefix ARG always prompt for command to use."
+**** prelude-recentf-ido-find-file ()
+  "Find a recent file using ido."
+**** prelude-recompile-init ()
+  "Byte-compile all your dotfiles again."
+**** prelude-rename-buffer-and-file ()
+  "Rename current buffer and if the buffer is visiting a file, rename it too."
+**** prelude-smart-open-line (arg)
+  "Insert an empty line after the current line.
+Position the cursor at its beginning, according to the current mode.
+
+With a prefix ARG open line above the current line."
+**** prelude-smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at it's beginning, according to the current mode."
+**** prelude-sudo-edit (&optional arg)
+  "Edit currently visited file as root.
+
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+**** prelude-swap-windows ()
+  "If you have 2 windows, it swaps them."
+**** prelude-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+**** prelude-tip-of-the-day ()
+  "Display a random entry from `prelude-tips'."
+**** prelude-top-join-line ()
+  "Join the current line with the line beneath it."
+**** prelude-update ()
+  "Update Prelude to its latest version."
+**** prelude-update-packages (&optional arg)
+  "Update Prelude's packages.
+This includes package installed via `prelude-require-package'.
+
+With a prefix ARG updates all installed packages."
+**** prelude-view-url ()
+  "Open a new buffer containing the contents of URL."
+**** prelude-visit-term-buffer ()
+  "Create or visit a terminal buffer."
+*** defun
+**** prelude-buffer-mode (buffer-or-name)
+  "Retrieve the `major-mode' of BUFFER-OR-NAME."
+**** prelude-eval-after-init (form)
+  "Add `(lambda () FORM)' to `after-init-hook'.
+
+    If Emacs has already finished initialization, also eval FORM immediately."
+**** prelude-get-positions-of-line-or-region ()
+  "Return positions (beg . end) of the current line
+or region."
+**** prelude-search (query-url prompt)
+  "Open the search url constructed with the QUERY-URL.
+PROMPT sets the `read-string prompt."
+**** prelude-start-or-switch-to (function buffer-name)
+  "Invoke FUNCTION if there is no buffer with BUFFER-NAME.
+Otherwise switch to the buffer named BUFFER-NAME.  Don't clobber
+the current buffer."
+**** prelude-todo-ov-evaporate (_ov _after _beg _end &optional _length)
+*** defmacro
+**** prelude-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
+  "Given some information regarding a search engine, install the interactive command to search through them"
+*** defadvice
+**** ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+** /home/lbrown/.emacs.d/core/prelude-custom.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-custom.el bob
+Commentary
+*** provide
+**** prelude-custom 
+*** defgroup
+**** prelude 
+  "Emacs Prelude configuration."
+*** defcustom
+**** prelude-auto-save 
+  "Non-nil values enable Prelude's auto save."
+**** prelude-clean-whitespace-on-save 
+  "Cleanup whitespace from file before it's saved.
+Will only occur if `prelude-whitespace' is also enabled."
+**** prelude-flyspell 
+  "Non-nil values enable Prelude's flyspell support."
+**** prelude-guru 
+  "Non-nil values enable `guru-mode'."
+**** prelude-user-init-file 
+**** prelude-whitespace 
+  "Non-nil values enable Prelude's whitespace visualization."
+**** prelude-yank-indent-modes 
+  "Modes in which to indent regions that are yanked (or yank-popped).
+Only modes that don't derive from `prog-mode' should be listed here."
+**** prelude-yank-indent-threshold 
+  "Threshold (# chars) over which indentation does not automatically occur."
+** /home/lbrown/.emacs.d/core/prelude-editor.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-editor.el bob
+Commentary
+*** require
+**** ansi-color 
+**** anzu 
+**** bookmark 
+**** browse-kill-ring 
+**** compile 
+**** diminish 
+**** dired-x 
+**** ediff 
+**** eshell 
+**** expand-region 
+**** flyspell 
+**** midnight 
+**** operate-on-number 
+**** projectile 
+**** re-builder 
+**** recentf 
+**** savehist 
+**** saveplace 
+**** smartparens-config 
+**** tramp 
+**** uniquify 
+**** volatile-highlights 
+**** whitespace 
+**** windmove 
+*** provide
+**** prelude-editor 
+*** command
+**** prelude-colorize-compilation-buffer ()
+  "Colorize a compilation mode buffer."
+*** defun
+**** prelude-auto-save-command ()
+  "Save the current buffer if `prelude-auto-save' is not nil."
+**** prelude-cleanup-maybe ()
+  "Invoke `whitespace-cleanup' if `prelude-clean-whitespace-on-save' is not nil."
+**** prelude-enable-flyspell ()
+  "Enable command `flyspell-mode' if `prelude-flyspell' is not nil."
+**** prelude-enable-whitespace ()
+  "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
+**** prelude-recentf-exclude-p (file)
+  "A predicate to decide whether to exclude FILE from recentf."
+**** yank-advised-indent-function (beg end)
+  "Do indentation, as long as the region isn't too large."
+*** defmacro
+**** advise-commands (advice-name commands class &rest body)
+  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+
+The body of the advice is in BODY."
+**** with-region-or-buffer (func)
+  "When called with no active region, call FUNC on current buffer."
+*** defadvice
+**** exchange-point-and-mark (before deactivate-mark activate compile)
+  "When called with no active region, do not activate mark."
+**** set-buffer-major-mode (after set-major-mode activate compile)
+  "Set buffer major mode according to `auto-mode-alist'."
+*** defalias
+**** ack 	ack-and-a-half
+**** ack-find-file 	ack-and-a-half-find-file
+**** ack-find-file-same 	ack-and-a-half-find-file-same
+**** ack-same 	ack-and-a-half-same
+*** set_key
+**** anzu-query-replace 	"M-%"
+**** anzu-query-replace-regexp 	"C-M-%"
+**** browse-kill-ring 	"s-y"
+** /home/lbrown/.emacs.d/core/prelude-global-keybindings.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-global-keybindings.el bob
+Commentary
+*** provide
+**** prelude-global-keybindings 
+*** set_key
+**** ace-jump-buffer 	"s->"
+**** ace-jump-mode 	"s-."
+**** align-regexp 	"C-x \\"
+**** er/expand-region 	"C-="
+**** eshell 	"C-x m"
+**** hippie-expand 	"M-/"
+**** ibuffer 	"C-x C-b"
+**** magit-status 	"C-x g"
+**** menu-bar-mode 	"<f12>"
+**** prelude-fullscreen) 	"<f11>"
+**** prelude-top-join-line 	"C-^"
+**** proced) 	"C-x p"
+**** shell 	"C-x M-m"
+**** smex 	"C-x C-m"
+**** text-scale-decrease 	"C--"
+**** text-scale-increase 	"C-+"
+**** zap-up-to-char 	"M-Z"
+** /home/lbrown/.emacs.d/core/prelude-mode.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-mode.el bob
+Commentary
+*** require
+**** easymenu 
+*** provide
+**** prelude-mode 
+*** defun
+**** prelude-mode-add-menu ()
+  "Add a menu entry for `prelude-mode' under Tools."
+**** prelude-mode-remove-menu ()
+  "Remove `prelude-mode' menu entry."
+**** prelude-off ()
+  "Turn off `prelude-mode'."
+**** prelude-on ()
+  "Turn on `prelude-mode'."
+*** define_key
+**** god-local-mode 	"s-g"
+**** magit-blame-mode 	"s-m b"
+**** magit-file-log 	"s-m f"
+**** magit-log 	"s-m l"
+**** magit-status 	"s-m m"
+**** prelude-cleanup-buffer-or-region 	"C-c n"
+**** prelude-delete-file-and-buffer 	"C-c D"
+**** prelude-duckduckgo 	"C-c U"
+**** prelude-duplicate-and-comment-current-line-or-region 	"C-c M-d"
+**** prelude-duplicate-current-line-or-region 	"C-c d"
+**** prelude-eval-and-replace 	"C-c e"
+**** prelude-find-shell-init-file 	"C-c S"
+**** prelude-find-user-init-file 	"C-c I"
+**** prelude-github 	"C-c G"
+**** prelude-google 	"C-c g"
+**** prelude-indent-defun 	"C-M-z"
+**** prelude-indent-rigidly-and-copy-to-clipboard 	"C-c TAB"
+**** prelude-kill-other-buffers 	"C-c k"
+**** prelude-kill-whole-line 	"s-k"
+**** prelude-open-with 	"C-c o"
+**** prelude-recentf-ido-find-file 	"s-r"
+**** prelude-rename-buffer-and-file 	"C-c r"
+**** prelude-smart-open-line 	"M-o"
+**** prelude-smart-open-line-above 	"s-o"
+**** prelude-swap-windows 	"C-c s"
+**** prelude-top-join-line 	"s-j"
+**** prelude-view-url 	"C-c u"
+**** prelude-visit-term-buffer 	"C-c t"
+**** prelude-youtube 	"C-c y"
+**** projectile-command-map 	"s-p"
+** /home/lbrown/.emacs.d/core/prelude-osx.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-osx.el bob
+Commentary
+*** require
+**** exec-path-from-shell 
+*** provide
+**** prelude-osx 
+*** command
+**** prelude-swap-meta-and-super ()
+  "Swap the mapping of Meta and Super.
+Very useful for people using their Mac with a
+Windows external keyboard from time to time."
+*** set_key
+**** vkill 	"C-x p"
+** /home/lbrown/.emacs.d/core/prelude-packages.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-packages.el bob
+Commentary
+*** require
+**** cl 
+**** package 
+*** provide
+**** prelude-packages 
+*** command
+**** prelude-list-foreign-packages ()
+  "Browse third-party packages not bundled with Prelude.
+
+Behaves similarly to `package-list-packages', but shows only the packages that
+are installed and are not in `prelude-packages'.  Useful for
+removing unwanted packages."
+*** defun
+**** prelude-install-packages ()
+  "Install all packages listed in `prelude-packages'."
+**** prelude-packages-installed-p ()
+  "Check if all packages in `prelude-packages' are installed."
+**** prelude-require-package (package)
+  "Install PACKAGE unless already installed."
+**** prelude-require-packages (packages)
+  "Ensure PACKAGES are installed.
+Missing packages are installed automatically."
+*** defmacro
+**** prelude-auto-install (extension package mode)
+  "When file with EXTENSION is opened triggers auto-install of PACKAGE.
+PACKAGE is installed only if not already present.  The file is opened in MODE."
+** /home/lbrown/.emacs.d/core/prelude-ui.el
+*** commentary
+**** /home/lbrown/.emacs.d/core/prelude-ui.el bob
+Commentary
+*** provide
+**** prelude-ui 
+** /home/lbrown/.emacs.d/modules/prelude-c.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-c.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-c 
+*** defun
+**** prelude-c-mode-common-defaults ()
+**** prelude-makefile-mode-defaults ()
+** /home/lbrown/.emacs.d/modules/prelude-clojure.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-clojure.el bob
+Commentary
+*** require
+**** prelude-lisp 
+*** provide
+**** prelude-clojure 
+** /home/lbrown/.emacs.d/modules/prelude-coffee.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-coffee.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-coffee 
+** /home/lbrown/.emacs.d/modules/prelude-common-lisp.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-common-lisp.el bob
+Commentary
+*** require
+**** prelude-lisp 
+*** provide
+**** prelude-common-lisp 
+** /home/lbrown/.emacs.d/modules/prelude-company.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-company.el bob
+Commentary
+*** require
+**** company 
+*** provide
+**** prelude-company 
+** /home/lbrown/.emacs.d/modules/prelude-css.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-css.el bob
+Commentary
+*** provide
+**** prelude-css 
+** /home/lbrown/.emacs.d/modules/prelude-emacs-lisp.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-emacs-lisp.el bob
+Commentary
+*** require
+**** prelude-lisp 
+*** provide
+**** prelude-emacs-lisp 
+*** command
+**** prelude-visit-ielm ()
+  "Switch to default `ielm' buffer.
+Start `ielm' if it's not already running."
+*** defun
+**** prelude-conditional-emacs-lisp-checker ()
+  "Don't check doc style in Emacs Lisp test files."
+**** prelude-emacs-lisp-mode-defaults ()
+  "Sensible defaults for `emacs-lisp-mode'."
+**** prelude-ielm-mode-defaults ()
+  "Sensible defaults for `ielm'."
+**** prelude-recompile-elc-on-save ()
+  "Recompile your elc when saving an elisp file."
+** /home/lbrown/.emacs.d/modules/prelude-erc.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-erc.el bob
+Commentary
+*** require
+**** erc 
+**** erc-autoaway 
+**** erc-log 
+**** erc-notify 
+**** erc-spelling 
+*** provide
+**** prelude-erc 
+*** command
+**** start-irc ()
+  "Connect to IRC."
+**** stop-irc ()
+  "Disconnects from all irc servers"
+*** defun
+**** call-libnotify (matched-type nick msg)
+**** erc-notify-allowed-p (nick &optional delay)
+  "Return non-nil if a notification should be made for NICK.
+If DELAY is specified, it will be the minimum time in seconds
+that can occur between two notifications.  The default is
+`erc-notify-timeout'."
+**** erc-notify-on-private-msg (proc parsed)
+**** filter-server-buffers ()
+** /home/lbrown/.emacs.d/modules/prelude-erlang.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-erlang.el bob
+Commentary
+*** require
+**** erlang-start nil t 
+**** prelude-programming 
+**** projectile 
+**** wrangler)) 
+*** provide
+**** prelude-erlang 
+*** defcustom
+**** wrangler-path 
+  "The location of wrangler elisp directory."
+** /home/lbrown/.emacs.d/modules/prelude-evil.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-evil.el bob
+Commentary
+*** require
+**** evil-visualstar 
+*** provide
+**** prelude-evil 
+*** command
+**** prelude-evil-scroll-down-other-window ()
+**** prelude-evil-scroll-up-other-window ()
+**** prelude-yank-to-end-of-line ()
+  "Yank to end of line."
+*** defun
+**** prelude-evil-key-bindings-for-org ()
+** /home/lbrown/.emacs.d/modules/prelude-go.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-go.el bob
+Commentary
+*** require
+**** go-projectile 
+**** prelude-programming 
+*** provide
+**** prelude-go 
+*** define_key
+**** go-run 	"C-c b"
+**** go-test-current-file 	"C-c m"
+**** go-test-current-project 	"C-c a"
+**** go-test-current-test 	"C-c ."
+**** godoc-at-point) 	"C-h f"
+** /home/lbrown/.emacs.d/modules/prelude-haskell.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-haskell.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-haskell 
+** /home/lbrown/.emacs.d/modules/prelude-helm.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-helm.el bob
+Commentary
+*** require
+**** helm-misc 
+**** helm-projectile 
+*** provide
+**** prelude-helm 
+*** command
+**** helm-prelude ()
+  "Preconfigured `helm'."
+** /home/lbrown/.emacs.d/modules/prelude-ido.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-ido.el bob
+Commentary
+*** require
+**** flx-ido 
+**** ido 
+**** ido-ubiquitous 
+**** smex 
+*** provide
+**** prelude-ido 
+*** set_key
+**** smex 	"M-x"
+**** smex-major-mode-commands 	"M-X"
+** /home/lbrown/.emacs.d/modules/prelude-js.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-js.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-js 
+** /home/lbrown/.emacs.d/modules/prelude-key-chord.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-key-chord.el bob
+Commentary
+*** require
+**** key-chord 
+*** provide
+**** prelude-key-chord 
+*** key_chord
+**** ace-jump-char-mode 	"jk"
+**** ace-jump-line-mode 	"jl"
+**** ace-jump-word-mode 	"jj"
+**** browse-kill-ring 	"yy"
+**** execute-extended-command 	"xx"
+**** prelude-switch-to-previous-buffer 	"JJ"
+**** undo-tree-visualize 	"uu"
+** /home/lbrown/.emacs.d/modules/prelude-latex.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-latex.el bob
+Commentary
+*** require
+**** cl 
+**** smartparens-latex 
+*** provide
+**** prelude-latex 
+*** defcustom
+**** prelude-latex-fast-math-entry 
+  "Method used for fast math symbol entry in LaTeX."
+*** defun
+**** prelude-latex-mode-defaults ()
+  "Default Prelude hook for `LaTeX-mode'."
+** /home/lbrown/.emacs.d/modules/prelude-lisp.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-lisp.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-lisp 
+*** defun
+**** prelude-interactive-lisp-coding-defaults ()
+**** prelude-lisp-coding-defaults ()
+** /home/lbrown/.emacs.d/modules/prelude-mediawiki.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-mediawiki.el bob
+Commentary
+*** provide
+**** prelude-mediawiki 
+** /home/lbrown/.emacs.d/modules/prelude-ocaml.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-ocaml.el bob
+Commentary
+*** require
+**** merlin 
+**** tuareg 
+**** utop 
+*** provide
+**** prelude-ocaml 
+** /home/lbrown/.emacs.d/modules/prelude-org.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-org.el bob
+Commentary
+*** provide
+**** prelude-org 
+*** defun
+**** prelude-org-mode-defaults ()
+** /home/lbrown/.emacs.d/modules/prelude-perl.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-perl.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-perl 
+*** defun
+**** prelude-cperl-mode-defaults ()
+*** defalias
+**** perl-mode 	cperl-mode
+** /home/lbrown/.emacs.d/modules/prelude-programming.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-programming.el bob
+Commentary
+*** require
+**** imenu nil t) 
+**** which-func 
+*** provide
+**** prelude-programming 
+*** command
+**** prelude-ido-goto-symbol (&optional symbol-list)
+  "Refresh imenu and jump to a place in the buffer using Ido."
+*** defun
+**** prelude-font-lock-comment-annotations ()
+  "Highlight a bunch of well known comment annotations.
+
+This functions should be added to the hooks of major modes for programming."
+**** prelude-local-comment-auto-fill ()
+**** prelude-prog-mode-defaults ()
+  "Default coding hook, useful with any programming language."
+** /home/lbrown/.emacs.d/modules/prelude-python.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-python.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-python 
+*** defun
+**** prelude-python--detect-encoding ()
+**** prelude-python--encoding-comment-required-p ()
+**** prelude-python--insert-coding-comment (encoding)
+**** prelude-python-mode-defaults ()
+  "Defaults for Python programming."
+**** prelude-python-mode-set-encoding ()
+  "Insert a magic comment header with the proper encoding if necessary."
+** /home/lbrown/.emacs.d/modules/prelude-ruby.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-ruby.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-ruby 
+** /home/lbrown/.emacs.d/modules/prelude-scala.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-scala.el bob
+Commentary
+*** require
+**** prelude-programming 
+*** provide
+**** prelude-scala 
+*** defun
+**** prelude-scala-mode-defaults ()
+** /home/lbrown/.emacs.d/modules/prelude-scheme.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-scheme.el bob
+Commentary
+*** require
+**** geiser 
+**** prelude-lisp 
+*** provide
+**** prelude-scheme 
+** /home/lbrown/.emacs.d/modules/prelude-scss.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-scss.el bob
+Commentary
+*** require
+**** prelude-css 
+*** provide
+**** prelude-scss 
+*** defun
+**** prelude-scss-mode-defaults ()
+** /home/lbrown/.emacs.d/modules/prelude-shell.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-shell.el bob
+Commentary
+*** require
+**** sh-script 
+*** provide
+**** prelude-shell 
+** /home/lbrown/.emacs.d/modules/prelude-web.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-web.el bob
+Commentary
+*** require
+**** web-mode 
+*** provide
+**** prelude-web 
+** /home/lbrown/.emacs.d/modules/prelude-xml.el
+*** commentary
+**** /home/lbrown/.emacs.d/modules/prelude-xml.el bob
+Commentary
+*** require
+**** nxml-mode 
+*** provide
+**** prelude-xml 
+** /home/lbrown/.emacs.d/personal/custom.el
+** /home/lbrown/.emacs.d/personal/myloads.el
+*** require
+**** desktop 
+**** dired+ 
+**** dired-details+ 
+**** dired-toggle 
+**** linum 
+**** nav 
+**** page-break-lines 
+**** persp-projectile 
+**** perspective 
+*** set_key
+**** dired-toggle 	"<f5>"
+* Prelude by type
+** commentary
+*** /home/lbrown/.emacs.d/core/prelude-core.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-custom.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-editor.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-global-keybindings.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-mode.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-osx.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-packages.el bob
+Commentary
+*** /home/lbrown/.emacs.d/core/prelude-ui.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-c.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-clojure.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-coffee.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-common-lisp.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-company.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-css.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-emacs-lisp.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-erc.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-erlang.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-evil.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-go.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-haskell.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-helm.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-ido.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-js.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-key-chord.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-latex.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-lisp.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-mediawiki.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-ocaml.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-org.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-perl.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-programming.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-python.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-ruby.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-scala.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-scheme.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-scss.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-shell.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-web.el bob
+Commentary
+*** /home/lbrown/.emacs.d/modules/prelude-xml.el bob
+Commentary
+** require
+*** ansi-color 
+*** anzu 
+*** bookmark 
+*** browse-kill-ring 
+*** cl 
+*** company 
+*** compile 
+*** dash 
+*** desktop 
+*** diminish 
+*** dired+ 
+*** dired-details+ 
+*** dired-toggle 
+*** dired-x 
+*** easymenu 
+*** ediff 
+*** epl 
+*** erc 
+*** erc-autoaway 
+*** erc-log 
+*** erc-notify 
+*** erc-spelling 
+*** erlang-start nil t 
+*** eshell 
+*** evil-visualstar 
+*** exec-path-from-shell 
+*** expand-region 
+*** flx-ido 
+*** flyspell 
+*** geiser 
+*** go-projectile 
+*** helm-misc 
+*** helm-projectile 
+*** ido 
+*** ido-ubiquitous 
+*** imenu nil t) 
+*** key-chord 
+*** linum 
+*** merlin 
+*** midnight 
+*** nav 
+*** nxml-mode 
+*** operate-on-number 
+*** ov 
+*** package 
+*** page-break-lines 
+*** persp-projectile 
+*** perspective 
+*** prelude-css 
+*** prelude-lisp 
+*** prelude-programming 
+*** projectile 
+*** re-builder 
+*** recentf 
+*** savehist 
+*** saveplace 
+*** sh-script 
+*** smartparens-config 
+*** smartparens-latex 
+*** smex 
+*** thingatpt 
+*** tramp 
+*** tuareg 
+*** uniquify 
+*** utop 
+*** volatile-highlights 
+*** web-mode 
+*** which-func 
+*** whitespace 
+*** windmove 
+*** wrangler)) 
+** provide
+*** prelude-c 
+*** prelude-clojure 
+*** prelude-coffee 
+*** prelude-common-lisp 
+*** prelude-company 
+*** prelude-core 
+*** prelude-css 
+*** prelude-custom 
+*** prelude-editor 
+*** prelude-emacs-lisp 
+*** prelude-erc 
+*** prelude-erlang 
+*** prelude-evil 
+*** prelude-global-keybindings 
+*** prelude-go 
+*** prelude-haskell 
+*** prelude-helm 
+*** prelude-ido 
+*** prelude-js 
+*** prelude-key-chord 
+*** prelude-latex 
+*** prelude-lisp 
+*** prelude-mediawiki 
+*** prelude-mode 
+*** prelude-ocaml 
+*** prelude-org 
+*** prelude-osx 
+*** prelude-packages 
+*** prelude-perl 
+*** prelude-programming 
+*** prelude-python 
+*** prelude-ruby 
+*** prelude-scala 
+*** prelude-scheme 
+*** prelude-scss 
+*** prelude-shell 
+*** prelude-ui 
+*** prelude-web 
+*** prelude-xml 
+** defgroup
+*** prelude 
+  "Emacs Prelude configuration."
+** defcustom
+*** prelude-auto-save 
+  "Non-nil values enable Prelude's auto save."
+*** prelude-clean-whitespace-on-save 
+  "Cleanup whitespace from file before it's saved.
+Will only occur if `prelude-whitespace' is also enabled."
+*** prelude-flyspell 
+  "Non-nil values enable Prelude's flyspell support."
+*** prelude-guru 
+  "Non-nil values enable `guru-mode'."
+*** prelude-latex-fast-math-entry 
+  "Method used for fast math symbol entry in LaTeX."
+*** prelude-user-init-file 
+*** prelude-whitespace 
+  "Non-nil values enable Prelude's whitespace visualization."
+*** prelude-yank-indent-modes 
+  "Modes in which to indent regions that are yanked (or yank-popped).
+Only modes that don't derive from `prog-mode' should be listed here."
+*** prelude-yank-indent-threshold 
+  "Threshold (# chars) over which indentation does not automatically occur."
+*** wrangler-path 
+  "The location of wrangler elisp directory."
+** command
+*** helm-prelude ()
+  "Preconfigured `helm'."
+*** prelude-annotate-todo ()
+  "Put fringe marker on TODO: lines in the curent buffer."
+*** prelude-cleanup-buffer-or-region ()
+  "Cleanup a region if selected, otherwise the whole buffer."
+*** prelude-colorize-compilation-buffer ()
+  "Colorize a compilation mode buffer."
+*** prelude-copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+*** prelude-create-scratch-buffer ()
+  "Create a new scratch buffer."
+*** prelude-delete-file-and-buffer ()
+  "Kill the current buffer and deletes the file it is visiting."
+*** prelude-duplicate-and-comment-current-line-or-region (arg)
+  "Duplicates and comments the current line or region ARG times.
+If there's no region, the current line will be duplicated.  However, if
+there's a region, all lines that region covers will be duplicated."
+*** prelude-duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated.  However, if
+there's a region, all lines that region covers will be duplicated."
+*** prelude-eval-and-replace ()
+  "Replace the preceding sexp with its value."
+*** prelude-evil-scroll-down-other-window ()
+*** prelude-evil-scroll-up-other-window ()
+*** prelude-find-shell-init-file ()
+  "Edit the shell init file in another window."
+*** prelude-find-user-init-file (&optional arg)
+  "Edit the `prelude-user-init-file', in another window.
+With a prefix argument ARG, find the `user-init-file' instead."
+*** prelude-fullscreen ()
+  "Make Emacs window fullscreen.
+
+This follows freedesktop standards, should work in X servers."
+*** prelude-ido-goto-symbol (&optional symbol-list)
+  "Refresh imenu and jump to a place in the buffer using Ido."
+*** prelude-indent-defun ()
+  "Indent the current defun."
+*** prelude-indent-rigidly-and-copy-to-clipboard (begin end arg)
+  "Indent region between BEGIN and END by ARG columns and copy to clipboard."
+*** prelude-insert-date ()
+  "Insert a timestamp according to locale's date and time format."
+*** prelude-kill-other-buffers ()
+  "Kill all buffers but the current one.
+Doesn't mess with special buffers."
+*** prelude-kill-whole-line (&optional arg)
+  "A simple wrapper around command `kill-whole-line' that respects indentation.
+Passes ARG to command `kill-whole-line' when provided."
+*** prelude-list-foreign-packages ()
+  "Browse third-party packages not bundled with Prelude.
+
+Behaves similarly to `package-list-packages', but shows only the packages that
+are installed and are not in `prelude-packages'.  Useful for
+removing unwanted packages."
+*** prelude-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+*** prelude-open-with (arg)
+  "Open visited file in default external program.
+When in dired mode, open file under the cursor.
+
+With a prefix ARG always prompt for command to use."
+*** prelude-recentf-ido-find-file ()
+  "Find a recent file using ido."
+*** prelude-recompile-init ()
+  "Byte-compile all your dotfiles again."
+*** prelude-rename-buffer-and-file ()
+  "Rename current buffer and if the buffer is visiting a file, rename it too."
+*** prelude-smart-open-line (arg)
+  "Insert an empty line after the current line.
+Position the cursor at its beginning, according to the current mode.
+
+With a prefix ARG open line above the current line."
+*** prelude-smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at it's beginning, according to the current mode."
+*** prelude-sudo-edit (&optional arg)
+  "Edit currently visited file as root.
+
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+*** prelude-swap-meta-and-super ()
+  "Swap the mapping of Meta and Super.
+Very useful for people using their Mac with a
+Windows external keyboard from time to time."
+*** prelude-swap-windows ()
+  "If you have 2 windows, it swaps them."
+*** prelude-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+*** prelude-tip-of-the-day ()
+  "Display a random entry from `prelude-tips'."
+*** prelude-top-join-line ()
+  "Join the current line with the line beneath it."
+*** prelude-update ()
+  "Update Prelude to its latest version."
+*** prelude-update-packages (&optional arg)
+  "Update Prelude's packages.
+This includes package installed via `prelude-require-package'.
+
+With a prefix ARG updates all installed packages."
+*** prelude-view-url ()
+  "Open a new buffer containing the contents of URL."
+*** prelude-visit-ielm ()
+  "Switch to default `ielm' buffer.
+Start `ielm' if it's not already running."
+*** prelude-visit-term-buffer ()
+  "Create or visit a terminal buffer."
+*** prelude-yank-to-end-of-line ()
+  "Yank to end of line."
+*** start-irc ()
+  "Connect to IRC."
+*** stop-irc ()
+  "Disconnects from all irc servers"
+** defun
+*** call-libnotify (matched-type nick msg)
+*** erc-notify-allowed-p (nick &optional delay)
+  "Return non-nil if a notification should be made for NICK.
+If DELAY is specified, it will be the minimum time in seconds
+that can occur between two notifications.  The default is
+`erc-notify-timeout'."
+*** erc-notify-on-private-msg (proc parsed)
+*** filter-server-buffers ()
+*** prelude-auto-save-command ()
+  "Save the current buffer if `prelude-auto-save' is not nil."
+*** prelude-buffer-mode (buffer-or-name)
+  "Retrieve the `major-mode' of BUFFER-OR-NAME."
+*** prelude-c-mode-common-defaults ()
+*** prelude-cleanup-maybe ()
+  "Invoke `whitespace-cleanup' if `prelude-clean-whitespace-on-save' is not nil."
+*** prelude-conditional-emacs-lisp-checker ()
+  "Don't check doc style in Emacs Lisp test files."
+*** prelude-cperl-mode-defaults ()
+*** prelude-emacs-lisp-mode-defaults ()
+  "Sensible defaults for `emacs-lisp-mode'."
+*** prelude-enable-flyspell ()
+  "Enable command `flyspell-mode' if `prelude-flyspell' is not nil."
+*** prelude-enable-whitespace ()
+  "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
+*** prelude-eval-after-init (form)
+  "Add `(lambda () FORM)' to `after-init-hook'.
+
+    If Emacs has already finished initialization, also eval FORM immediately."
+*** prelude-evil-key-bindings-for-org ()
+*** prelude-font-lock-comment-annotations ()
+  "Highlight a bunch of well known comment annotations.
+
+This functions should be added to the hooks of major modes for programming."
+*** prelude-get-positions-of-line-or-region ()
+  "Return positions (beg . end) of the current line
+or region."
+*** prelude-ielm-mode-defaults ()
+  "Sensible defaults for `ielm'."
+*** prelude-install-packages ()
+  "Install all packages listed in `prelude-packages'."
+*** prelude-interactive-lisp-coding-defaults ()
+*** prelude-latex-mode-defaults ()
+  "Default Prelude hook for `LaTeX-mode'."
+*** prelude-lisp-coding-defaults ()
+*** prelude-local-comment-auto-fill ()
+*** prelude-makefile-mode-defaults ()
+*** prelude-mode-add-menu ()
+  "Add a menu entry for `prelude-mode' under Tools."
+*** prelude-mode-remove-menu ()
+  "Remove `prelude-mode' menu entry."
+*** prelude-off ()
+  "Turn off `prelude-mode'."
+*** prelude-on ()
+  "Turn on `prelude-mode'."
+*** prelude-org-mode-defaults ()
+*** prelude-packages-installed-p ()
+  "Check if all packages in `prelude-packages' are installed."
+*** prelude-prog-mode-defaults ()
+  "Default coding hook, useful with any programming language."
+*** prelude-python--detect-encoding ()
+*** prelude-python--encoding-comment-required-p ()
+*** prelude-python--insert-coding-comment (encoding)
+*** prelude-python-mode-defaults ()
+  "Defaults for Python programming."
+*** prelude-python-mode-set-encoding ()
+  "Insert a magic comment header with the proper encoding if necessary."
+*** prelude-recentf-exclude-p (file)
+  "A predicate to decide whether to exclude FILE from recentf."
+*** prelude-recompile-elc-on-save ()
+  "Recompile your elc when saving an elisp file."
+*** prelude-require-package (package)
+  "Install PACKAGE unless already installed."
+*** prelude-require-packages (packages)
+  "Ensure PACKAGES are installed.
+Missing packages are installed automatically."
+*** prelude-scala-mode-defaults ()
+*** prelude-scss-mode-defaults ()
+*** prelude-search (query-url prompt)
+  "Open the search url constructed with the QUERY-URL.
+PROMPT sets the `read-string prompt."
+*** prelude-start-or-switch-to (function buffer-name)
+  "Invoke FUNCTION if there is no buffer with BUFFER-NAME.
+Otherwise switch to the buffer named BUFFER-NAME.  Don't clobber
+the current buffer."
+*** prelude-todo-ov-evaporate (_ov _after _beg _end &optional _length)
+*** yank-advised-indent-function (beg end)
+  "Do indentation, as long as the region isn't too large."
+** defmacro
+*** advise-commands (advice-name commands class &rest body)
+  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+
+The body of the advice is in BODY."
+*** prelude-auto-install (extension package mode)
+  "When file with EXTENSION is opened triggers auto-install of PACKAGE.
+PACKAGE is installed only if not already present.  The file is opened in MODE."
+*** prelude-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
+  "Given some information regarding a search engine, install the interactive command to search through them"
+*** with-region-or-buffer (func)
+  "When called with no active region, call FUNC on current buffer."
+** defadvice
+*** exchange-point-and-mark (before deactivate-mark activate compile)
+  "When called with no active region, do not activate mark."
+*** ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+*** set-buffer-major-mode (after set-major-mode activate compile)
+  "Set buffer major mode according to `auto-mode-alist'."
+** defalias
+*** ack 	ack-and-a-half
+*** ack-find-file 	ack-and-a-half-find-file
+*** ack-find-file-same 	ack-and-a-half-find-file-same
+*** ack-same 	ack-and-a-half-same
+*** perl-mode 	cperl-mode
+** define_key
+*** go-run 	"C-c b"
+*** go-test-current-file 	"C-c m"
+*** go-test-current-project 	"C-c a"
+*** go-test-current-test 	"C-c ."
+*** god-local-mode 	"s-g"
+*** godoc-at-point) 	"C-h f"
+*** magit-blame-mode 	"s-m b"
+*** magit-file-log 	"s-m f"
+*** magit-log 	"s-m l"
+*** magit-status 	"s-m m"
+*** prelude-cleanup-buffer-or-region 	"C-c n"
+*** prelude-delete-file-and-buffer 	"C-c D"
+*** prelude-duckduckgo 	"C-c U"
+*** prelude-duplicate-and-comment-current-line-or-region 	"C-c M-d"
+*** prelude-duplicate-current-line-or-region 	"C-c d"
+*** prelude-eval-and-replace 	"C-c e"
+*** prelude-find-shell-init-file 	"C-c S"
+*** prelude-find-user-init-file 	"C-c I"
+*** prelude-github 	"C-c G"
+*** prelude-google 	"C-c g"
+*** prelude-indent-defun 	"C-M-z"
+*** prelude-indent-rigidly-and-copy-to-clipboard 	"C-c TAB"
+*** prelude-kill-other-buffers 	"C-c k"
+*** prelude-kill-whole-line 	"s-k"
+*** prelude-open-with 	"C-c o"
+*** prelude-recentf-ido-find-file 	"s-r"
+*** prelude-rename-buffer-and-file 	"C-c r"
+*** prelude-smart-open-line 	"M-o"
+*** prelude-smart-open-line-above 	"s-o"
+*** prelude-swap-windows 	"C-c s"
+*** prelude-top-join-line 	"s-j"
+*** prelude-view-url 	"C-c u"
+*** prelude-visit-term-buffer 	"C-c t"
+*** prelude-youtube 	"C-c y"
+*** projectile-command-map 	"s-p"
+** set_key
+*** ace-jump-buffer 	"s->"
+*** ace-jump-mode 	"s-."
+*** align-regexp 	"C-x \\"
+*** anzu-query-replace 	"M-%"
+*** anzu-query-replace-regexp 	"C-M-%"
+*** browse-kill-ring 	"s-y"
+*** dired-toggle 	"<f5>"
+*** er/expand-region 	"C-="
+*** eshell 	"C-x m"
+*** hippie-expand 	"M-/"
+*** ibuffer 	"C-x C-b"
+*** magit-status 	"C-x g"
+*** menu-bar-mode 	"<f12>"
+*** prelude-fullscreen) 	"<f11>"
+*** prelude-top-join-line 	"C-^"
+*** proced) 	"C-x p"
+*** shell 	"C-x M-m"
+*** smex 	"M-x"
+*** smex-major-mode-commands 	"M-X"
+*** text-scale-decrease 	"C--"
+*** text-scale-increase 	"C-+"
+*** vkill 	"C-x p"
+*** zap-up-to-char 	"M-Z"
+** key_chord
+*** ace-jump-char-mode 	"jk"
+*** ace-jump-line-mode 	"jl"
+*** ace-jump-word-mode 	"jj"
+*** browse-kill-ring 	"yy"
+*** execute-extended-command 	"xx"
+*** prelude-switch-to-previous-buffer 	"JJ"
+*** undo-tree-visualize 	"uu"
+* Prelude by keybindings
+** "<f11>" 	prelude-fullscreen)
+** "<f12>" 	menu-bar-mode
+** "<f5>" 	dired-toggle
+** "C-+" 	text-scale-increase
+** "C--" 	text-scale-decrease
+** "C-=" 	er/expand-region
+** "C-M-%" 	anzu-query-replace-regexp
+** "C-M-z" 	prelude-indent-defun
+** "C-^" 	prelude-top-join-line
+** "C-c ." 	go-test-current-test
+** "C-c D" 	prelude-delete-file-and-buffer
+** "C-c G" 	prelude-github
+** "C-c I" 	prelude-find-user-init-file
+** "C-c J" 	ace-jump-buffer
+** "C-c M-d" 	prelude-duplicate-and-comment-current-line-or-region
+** "C-c S" 	prelude-find-shell-init-file
+** "C-c TAB" 	prelude-indent-rigidly-and-copy-to-clipboard
+** "C-c U" 	prelude-duckduckgo
+** "C-c a" 	go-test-current-project
+** "C-c b" 	go-run
+** "C-c d" 	prelude-duplicate-current-line-or-region
+** "C-c e" 	prelude-eval-and-replace
+** "C-c g" 	prelude-google
+** "C-c j" 	ace-jump-mode
+** "C-c k" 	prelude-kill-other-buffers
+** "C-c m" 	go-test-current-file
+** "C-c n" 	prelude-cleanup-buffer-or-region
+** "C-c o" 	prelude-open-with
+** "C-c r" 	prelude-rename-buffer-and-file
+** "C-c s" 	prelude-swap-windows
+** "C-c t" 	prelude-visit-term-buffer
+** "C-c u" 	prelude-view-url
+** "C-c y" 	prelude-youtube
+** "C-h f" 	godoc-at-point)
+** "C-x C-b" 	ibuffer
+** "C-x C-m" 	smex
+** "C-x M-m" 	shell
+** "C-x \\" 	align-regexp
+** "C-x g" 	magit-status
+** "C-x m" 	eshell
+** "C-x p" 	proced)
+** "C-x p"55 	vkill
+** "JJ" 	prelude-switch-to-previous-buffer
+** "M-%" 	anzu-query-replace
+** "M-/" 	hippie-expand
+** "M-X" 	smex-major-mode-commands
+** "M-Z" 	zap-up-to-char
+** "M-o" 	prelude-smart-open-line
+** "M-x" 	smex
+** "jj" 	ace-jump-word-mode
+** "jk" 	ace-jump-char-mode
+** "jl" 	ace-jump-line-mode
+** "s-." 	ace-jump-mode
+** "s->" 	ace-jump-buffer
+** "s-g" 	god-local-mode
+** "s-j" 	prelude-top-join-line
+** "s-k" 	prelude-kill-whole-line
+** "s-m b" 	magit-blame-mode
+** "s-m f" 	magit-file-log
+** "s-m l" 	magit-log
+** "s-m m" 	magit-status
+** "s-o" 	prelude-smart-open-line-above
+** "s-p" 	projectile-command-map
+** "s-r" 	prelude-recentf-ido-find-file
+** "s-y" 	browse-kill-ring
+** "uu" 	undo-tree-visualize
+** "xx" 	execute-extended-command
+** "yy" 	browse-kill-ring
