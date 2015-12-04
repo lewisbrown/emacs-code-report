@@ -28,6 +28,14 @@ or
 zargs -- prelude/**/*.el -- emacs-code-report.pl 
 ```
 
+## Example output
+
+Included herein is an example of the output, `example-output-for-prelude.org`, which
+was generated from a bbatsov/prelude installation. Github renders it as a
+Markdown document, which rather defeats the usefulness of the foldable outline
+capabilities of org-mode. It is best experienced with that tool.
+
+
 ## Todo
 - more comments
 - error checking
